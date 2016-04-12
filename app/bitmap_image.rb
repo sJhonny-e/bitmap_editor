@@ -2,6 +2,8 @@ class BitmapImage
 	
 	DEFAULT_COLOR = 'O'
 
+	attr_reader :width, :height
+
 	def initialize(width, height)
 		verify_in_bounds(width, height, 250, 250)
 		@width = width
