@@ -29,11 +29,7 @@ describe 'bitmap_image' do
 		end
 
 		it 'is initially all Os' do
-			for x in 1..5 do
-				for y in 1..6 do
-					expect(@image.bit_at(x, y)).to eql 'O'
-				end
-			end
+			expect_default
 		end
 	end
 
@@ -61,10 +57,15 @@ describe 'bitmap_image' do
 		it 'colors a single cell' do
 			@image.color_range!(2,3,2,3, 'kuku')
 			expect(@image.bit_at(2,3)).to eql 'kuku'
-			for x in 1..5 do
-				for y in 1..6 do
-					expect(@image.bit_at(x, y)).to eql 'O' unless ( x == 2 && y == 3 )
-				end
+			expect_default(2,3,2,3)
+		end
+
+	end
+
+	def expect_default(except_start_x = -1, except_start_y = -1, except_end_x = -1, except_end_y = -1)
+		for x in 1..5 do
+			for y in 1..6 do
+				expect(@image.bit_at(x, y)).to eql 'O' unless ( x.between?(except_start_x, except_end_x)  && y.between?(except_start_y, except_end_y) )
 			end
 		end
 	end
