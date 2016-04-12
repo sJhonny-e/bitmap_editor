@@ -13,7 +13,7 @@ class BitmapImage
 
 	def bit_at(x, y)
 		verify_in_bounds(x,y)
-		@matrix[x -1][y -1]
+		@matrix[x -1][y -1] || DEFAULT_COLOR
 	end
 
 	def color_range!(start_x, start_y, end_x, end_y, color)
