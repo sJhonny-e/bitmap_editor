@@ -10,25 +10,29 @@ class BitmapEditor
       print '> '
       @input = gets.chomp.split
       command = @input[0]
-      case command
-        when '?'
-          show_help
-        when 'X'
-          exit_console
-        when 'I'
-          init_image
-        when 'C'
-          @image.color_range!(1,1,@image.width, @image.height, nil)
-        when 'L'
-          color_bit
-        when 'V'
-          color_vertical
-        when 'H'
-          color_horizontal
-        when 'S'
-          puts @presenter.present_as_string
-        else
-          puts 'unrecognised command :('
+      begin
+        case command
+          when '?'
+            show_help
+          when 'X'
+            exit_console
+          when 'I'
+            init_image
+          when 'C'
+            @image.color_range!(1,1,@image.width, @image.height, nil)
+          when 'L'
+            color_bit
+          when 'V'
+            color_vertical
+          when 'H'
+            color_horizontal
+          when 'S'
+            puts @presenter.present_as_string
+          else
+            puts 'unrecognised command :('
+        end
+      rescue => e
+        puts e.message
       end
     end
   end
