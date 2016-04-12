@@ -14,6 +14,20 @@ class BitmapImage
 		@matrix[x -1][y -1]
 	end
 
+	def color_range!(start_x, start_y, end_x, end_y, color)
+		verify_in_bounds(start_x, start_y)
+		verify_in_bounds(end_x, end_y)
+		raise "start x (#{start_x}) must be smaller or equal to end x (#{end_x})" if (start_x > end_x)
+		raise "start y (#{start_y}) must be smaller or equal to end y (#{end_y})" if (start_y > end_y)
+
+		for i in ((start_x -1)..(end_x - 1)) do
+			for j in ((start_y -1)..(end_y -1)) do
+				@matrix[i][j] = color
+			end
+		end
+		
+		self #allow chaining	
+	end
 
 	private
 
