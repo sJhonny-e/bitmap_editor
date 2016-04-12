@@ -19,6 +19,7 @@ class BitmapEditor
           when 'I'
             init_image
           when 'C'
+            verify_image
             @image.color_range!(1,1,@image.width, @image.height, nil)
           when 'L'
             color_bit
@@ -27,6 +28,7 @@ class BitmapEditor
           when 'H'
             color_horizontal
           when 'S'
+            verify_image
             puts @presenter.present_as_string
           else
             puts 'unrecognised command :('
@@ -48,6 +50,7 @@ class BitmapEditor
     end
 
     def color_bit
+      verify_image
       x = @input[1].to_i
       y = @input[2].to_i
       color = @input[3]
@@ -56,6 +59,7 @@ class BitmapEditor
     end
 
     def color_vertical
+      verify_image
         x = @input[1].to_i
         y = @input[2].to_i
         y2 = @input[3].to_i
@@ -65,12 +69,17 @@ class BitmapEditor
     end
 
     def color_horizontal
+      verify_image
       x = @input[1].to_i
       x2 = @input[2].to_i
       y = @input[3].to_i
       color = @input[4]
 
       @image.color_range!(x,y,x2,y,color)
+    end
+
+    def verify_image
+      raise 'Image not initialized' unless @image
     end
 
     def exit_console
