@@ -60,6 +60,32 @@ describe 'bitmap_image' do
 			expect_default(2,3,2,3)
 		end
 
+		it 'colors a vertical line' do
+			@image.color_range!(1,2,3,2, 'kuku')
+			expect(@image.bit_at(1,2)).to eql 'kuku'
+			expect(@image.bit_at(2,2)).to eql 'kuku'
+			expect(@image.bit_at(3,2)).to eql 'kuku'
+			expect_default(1,2,3,2)
+		end
+
+		it 'colors a horizontal line' do
+			@image.color_range!(1,2,1,3, 'kuku')
+			expect(@image.bit_at(1,2)).to eql 'kuku'
+			expect(@image.bit_at(1,3)).to eql 'kuku'
+			expect_default(1,2,1,3)
+		end
+
+		it 'colors an arbitrary rectangle' do
+			@image.color_range!(1,2,2,4, 'kuku')
+			expect(@image.bit_at(1,2)).to eql 'kuku'
+			expect(@image.bit_at(2,2)).to eql 'kuku'
+			expect(@image.bit_at(1,3)).to eql 'kuku'
+			expect(@image.bit_at(1,4)).to eql 'kuku'
+			expect(@image.bit_at(2,3)).to eql 'kuku'
+			expect(@image.bit_at(2,4)).to eql 'kuku'
+
+			expect_default(1,2,2,4)
+		end
 	end
 
 	def expect_default(except_start_x = -1, except_start_y = -1, except_end_x = -1, except_end_y = -1)
