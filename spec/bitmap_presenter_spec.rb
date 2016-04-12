@@ -18,7 +18,7 @@ describe('BitmapPresenter') do
 		end
 
 		it 'returns a string with a line for each row' do
-			expect(@presenter.present_as_string).to eql 'XX\nYY\nZW\n'
+			expect(@presenter.present_as_string).to eql "XX\nYY\nZW\n"
 		end
 	end
 end

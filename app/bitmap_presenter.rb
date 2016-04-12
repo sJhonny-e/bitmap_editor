@@ -9,7 +9,7 @@ class BitmapPresenter
 			for j in (1..@image.width) do
 				str += @image.bit_at(j, i)
 			end
-			str += '\n'
+			str += "\n"
 		end
 		str
 	end
