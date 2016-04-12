@@ -1,3 +1,6 @@
+require_relative './bitmap_image'
+require_relative './bitmap_presenter'
+
 class BitmapEditor
 
   def run
@@ -5,12 +8,43 @@ class BitmapEditor
     puts 'type ? for help'
     while @running
       print '> '
-      input = gets.chomp
-      case input
+      input = gets.chomp.split
+      command = input[0]
+      case command
         when '?'
           show_help
         when 'X'
           exit_console
+        when 'I'
+          width = input[1].to_i
+          height = input[2].to_i
+
+          @image = BitmapImage.new(width, height)
+          @presenter = BitmapPresenter.new(@image)
+        when 'C'
+          @image.color_range!(1,1,@image.width, @image.height, nil)
+        when 'L'
+          x = input[1].to_i
+          y = input[2].to_i
+          color = input[3]
+          
+          @image.color_range!(x,y,x,y,color)
+        when 'V'
+          x = input[1].to_i
+          y = input[2].to_i
+          y2 = input[3].to_i
+          color = input[4]
+
+          @image.color_range!(x,y,x,y2,color)
+        when 'H'
+          x = input[1].to_i
+          x2 = input[2].to_i
+          y = input[3].to_i
+          color = input[4]
+
+          @image.color_range!(x,y,x2,y,color)
+        when 'S'
+          puts @presenter.present_as_string
         else
           puts 'unrecognised command :('
       end
