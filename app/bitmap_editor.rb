@@ -60,12 +60,12 @@ class BitmapEditor
 
     def color_vertical
       verify_image
-        x = @input[1].to_i
-        y = @input[2].to_i
-        y2 = @input[3].to_i
-        color = @input[4]
+      x = @input[1].to_i
+      y = @input[2].to_i
+      y2 = @input[3].to_i
+      color = @input[4]
 
-        @image.color_range!(x,y,x,y2,color)
+      @image.color_range!(x,y,x,y2,color)
     end
 
     def color_horizontal
